@@ -1,4 +1,5 @@
 import csv
+import os
 import time
 import random
 from pynput import keyboard
@@ -18,6 +19,7 @@ class Roulette:
         リスト作成
         """
         csv_path = './restaurant.csv'
+        # csv_path = '/Users/yuki/PycharmProjects/lunch-roulette/dist/restaurant.csv'
         with open(csv_path, encoding='utf-8') as f:
             reader = csv.reader(f)
 
@@ -50,6 +52,7 @@ class Roulette:
         """
         self.roulette_list = self.input_list.copy()
         random.shuffle(self.roulette_list)
+        random.shuffle(self.roulette_list)
 
     def run_roulette(self):
         """
@@ -58,6 +61,7 @@ class Roulette:
         """
         roulette_length = len(self.roulette_list)
 
+        print(self.roulette_list)
         print('-' * 40)
         print('|')
 
@@ -115,7 +119,7 @@ def main():
     roulette1.create_list()
 
     # 曜日で判定 まとめて追加
-    roulette1.append_tenhou()
+    roulette1.append_gakusyoku()
 
     # シャッフル
     roulette1.shuffling_list()
