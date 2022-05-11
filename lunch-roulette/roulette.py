@@ -11,6 +11,7 @@ class Roulette:
         self.roulette_list = []
         self.loop_flg = True
         self.app1 = None
+        self.result = None
 
     def create_list(self):
         """
@@ -65,6 +66,7 @@ class Roulette:
         i = 0
         while 1:
             if not self.loop_flg:
+                self.result = self.roulette_list[(i + 1) % roulette_length]
                 break
 
             first_num = i % roulette_length
@@ -128,6 +130,9 @@ def main():
 
     print('|')
     print('-' * 40)
+    print('')
+    print(' ' * 10 + '-' * 4 + roulette1.result + '-' * 4)
+    print('')
 
 
 if __name__ == '__main__':
