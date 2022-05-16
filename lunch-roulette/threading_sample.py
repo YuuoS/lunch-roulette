@@ -1,8 +1,20 @@
+# -*- coding:utf-8 -*-
+import threading
+
+# 別スレッドで処理される関数
 import csv
 import os
 import time
 import random
 from pynput import keyboard
+
+
+
+def func():
+    # 別スレッドでprintのループ
+    for j in range(100):
+        print("sub  : " + str(j))
+
 
 
 class Roulette:
@@ -165,3 +177,66 @@ def main():
     print('')
 
     time.sleep(20)
+
+def run_roulette(self):
+    """
+    ルーレットスタート
+    :return:
+    """
+    roulette_length = len(self.shuffled_list)
+
+    # print(self.roulette_list)
+    print('-' * 40)
+    print('|')
+
+    i = 0
+    while 1:
+        if not self.loop_flg:
+            self.result = self.shuffled_list[(i + 1) % roulette_length]
+            break
+
+        first_num = i % roulette_length
+        second_num = (i + 1) % roulette_length
+        third_num = (i + 2) % roulette_length
+        fourth_num = (i + 3) % roulette_length
+        fifth_num = (i + 4) % roulette_length
+
+        show_list = [self.shuffled_list[first_num],
+                     self.shuffled_list[second_num],
+                     self.shuffled_list[third_num],
+                     self.shuffled_list[fourth_num],
+                     self.shuffled_list[fifth_num]]
+
+        space1 = '|' + ' ' * 9
+        space2 = '|   ' + '⇨ ⇨' + '   '
+
+        if i >= 1:
+            # print('\u001B[5A', end='')
+            pass
+            # print('\033[5A', end='')
+
+        print('-' * 40)
+        print('|' + ' ' * 40 + '\n', end='')
+        # print('-' + ' ' * 40 + '\n', end='')
+        # print('-' + ' ' * 40 + '\n', end='')
+        # print('-' + ' ' * 40 + '\n', end='')
+        # print('-' + ' ' * 40 + '\n', end='')
+        # print('\u001B[5A', end='')
+        # print('\033[5A', end='')
+
+        print(space1 + show_list[0] + '\n'
+              + space1 + show_list[1] + '\n'
+              + space2 + show_list[2] + '   ⇦ ⇦' + '\n'
+              + space1 + show_list[3] + '\n'
+              + space1 + show_list[4] + '\n', end='')
+
+        time.sleep(0.1)
+        i += 1
+
+# スレッドの生成とスタート
+thread1 = threading.Thread(target=func)
+thread1.start()
+
+# メインスレッドでprintのループ
+for i in range(100):
+    print("main : " + str(i))
