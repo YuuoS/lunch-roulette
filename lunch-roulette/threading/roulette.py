@@ -19,6 +19,9 @@ class Roulette:
         for row in range(int(len(self.input_list) / 2 * 8)):
             self.input_list.append('学食')
 
+    def gaisyoku_day(self):
+        pass
+
     def tuesday(self):
         list_len = len(self.input_list)
         for row in range(int(list_len / 3 * 3)):
